@@ -1,0 +1,98 @@
+<div class="row mt-3"
+ *ngIf="movie$ | async as movie">
+  <div class="col-12">
+     <form
+      #movieEditorForm="ngForm"
+      (ngSubmit)="onUpdate(movie)"
+      style="max-width: 400px"
+      class="mx-auto"
+    >
+      <div class="form-group">
+        <label>Title</label>
+        <input
+        name="title"
+        [(ngModel)]="movie.title"
+        type="text"
+        class="form-control mb-3"
+        required
+        pattern="^[A-Ű]{1}[A-Űa-Ű ,.0-9()?:&]{2,29}$"
+        />
+        <div *ngIf="movieEditorForm.controls['title']?.invalid"
+        class="error-message">
+        Title must be filled minimum 5 maximum 50 characters long, and begins uppercase!
+        Title is minimum 2, maximum 30 characters long, and starts with an uppercase letter!
+
+        </div>
+      </div>
+
+      <div class="form-group mt-2">
+        <label>Genre</label>
+        <input
+        [(ngModel)]="movie.genre"
+        name="genre"
+        type="text"
+        class="form-control"
+        required
+        pattern="^[A-Ű]{1}[A-Űa-Ű ,|]{4,29}$"
+        />
+        <div *ngIf="movieEditorForm.controls['genre']?.invalid"
+        class="error-message">
+          Genre is minimum 5, maximum 30 characters long, and starts with an uppercase letter!
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <label>Director</label>
+        <input
+        [(ngModel)]="movie.director"
+        name="director"
+        type="text"
+        class="form-control"
+        required
+        pattern="^[A-Ű]{1}[A-Űa-Ű ,.]{4,29}$"
+        />
+        <div *ngIf="movieEditorForm.controls['director']?.invalid"
+        class="error-message">
+          Director is minimum 5, maximum 30 characters long, and starts with an uppercase letter!
+        </div>
+      </div>
+      <div class="form-grop mt-2">
+        <label>Year</label>
+        <input
+        [(ngModel)]="movie.releaseYear"
+        type="number"
+        name="year"
+        class="form-control"
+        required
+        pattern="^[1,2]{1}[0-9]{3}$"
+        />
+        <div *ngIf="movieEditorForm.controls['releaseYear']?.invalid"
+        class="error-message">
+          Release year must be filled and contens 4 number!
+        </div>
+      </div>
+      <div class="form-grop mt-2">
+        <label>Studio</label>
+        <input
+        [(ngModel)]="movie.studio"
+        type="text"
+        name="studio"
+        class="form-control"
+        required
+        pattern="^[A-Ű]{1}[A-Űa-Ű ,.]{4,49}$"
+        />
+        <div *ngIf="movieEditorForm.controls['studio']?.invalid"
+        class="error-message">
+          Studio must be filled!
+        </div>
+      </div>
+      <div class="d-grid gap-2 mt-3">
+        <button
+         [disabled]="movieEditorForm.invalid"
+         class="btn btn-primary"
+         type="submit">
+          <i class="fa fa-save"></i>  Save updates
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
